@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> ToDo List - DEVinhouse </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link media="screen" rel="stylesheet" type="text/css" href="index.css">
+    <link rel="icon" href="favicon.png"  type="image/icon type">
+  </head>
+  <body>
+
+  <div id="myDIV" class="header">
+    <h1 style="margin:5px">Minha Lista</h1>
+    <input type="text" id="myInput" placeholder="Nova Tarefa." style="text-transform: capitalize;"">
+    <span onclick="newElement()" class="addBtn">Add</span>
+  </div>
+
+  <ul id="myUL">
+    <li class="checked">Fazer a ToDo List do DEVinhouse</li>
+    <li>Terminar o curso</li>
+  </ul>
+
+  <script>
+  myNodelist = document.getElementsByTagName("LI");
+  var i;
+  for (i = 0; i < myNodelist.length; i++) {
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    myNodelist[i].appendChild(span);
+  }
+
+  var close = document.getElementsByClassName("close");
+  var i;
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+
+  var list = document.querySelector('ul');
+  list.addEventListener('click', function(ev) {
+    if (ev.target.tagName === 'LI') {
+      ev.target.classList.toggle('checked');
+    }
+  }, false);
+
+  function newElement() {
+    var li = document.createElement("li");
+    var inputValue = document.getElementById("myInput").value;
+    var capitalizedValue = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+    var t = document.createTextNode(capitalizedValue);
+    li.appendChild(t);
+    if (inputValue === '') {
+      alert("O item precisa de um nome.");
+    } else {
+      document.getElementById("myUL").appendChild(li);
+    }
+    document.getElementById("myInput").value = "";
+
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+  }
+  </script>
+
+  </body>
+</html>
